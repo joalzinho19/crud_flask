@@ -1,0 +1,33 @@
+body {
+    background-image: url("images/fundo2.jpg"); 
+    font-family: 'Verdana', sans-serif;
+    margin: 0; 
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;     
+    align-items: center;         
+    background-size: cover;      
+    background-position: center; 
+    background-repeat: no-repeat;
+}
+
+h1 {
+    font-family: 'Georgia', serif; 
+    font-size: 2.5em; 
+    color: #fffdfd; 
+    text-transform: capitalize; 
+    letter-spacing: 1px; 
+    background: linear-gradient(90deg, #0a0a0a, #4b4e54);
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+}
+
+input, textarea {
+    background-color: #f9f9f9; 
+    border-color: #ddd;        
+    color: #000000;               
+    cursor: auto; 
+}
+
+

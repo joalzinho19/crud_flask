@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Tarefas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>div {
+        width: 600px;                
+        padding: 24px;               
+        background-color: #ffffff;   
+        border: 2px solid #252825;   
+        border-radius: 10px;         
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); 
+        text-align: center;          
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transform: scale(1);        
+    }
+    
+    div input, div textarea {
+        font-size: 1em;             
+    }
+    
+    div h1 {
+        font-size: 3em;
+    }</style>
+</head>
+<body>
+    <div>
+    <h1>Editar Tarefas</h1>
+    
+    
+    <form method="POST" action="/atualizar_excluir">
+        <select name="key" id="redisIds">
+            {% for key in idTarefas %}
+            {% if key != 'tarefa:id' %}
+                <option value="{{ key }}">{{ key }}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+        <button type="submit">Buscar Tarefa</button>
+    </form>
+    
+    {% if tarefa %}
+    <h2>Detalhes da Tarefa</h2>
+    <ul>
+        <li>
+            <strong>ID:</strong> {{ tarefa['id'] }} <br>
+            <strong>Título:</strong> {{ tarefa['titulo'] }} <br>
+            <strong>Descrição:</strong> {{ tarefa['desc'] }} <br>
+            <strong>Data de criação:</strong> {{ tarefa['data'] }} <br>
+            <strong>Status:</strong> {{ tarefa['status'] }}
+        </li>
+    </ul>
+    
+    
+    <form method="POST" action="/apagar_tarefas">
+        <input type="hidden" name="key" value="{{ tarefa['id'] }}">
+        <button type="submit">Apagar Tarefa</button>
+    </form>
+
+    
+    <h2>Atualizar Tarefa</h2>
+    <form method="POST" action="/atualizar_tarefa">
+        <input type="hidden" name="key" value="{{ tarefa['id'] }}">
+        
+    
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" value="{{ tarefa['titulo'] }}" required>
+        <br><br>
+        
+    
+        <label for="desc">Descrição:</label>
+        <textarea id="desc" name="desc" rows="4" cols="50" required>{{ tarefa['desc'] }}</textarea>
+        <br><br>
+        
+    
+        <label for="data">Data de Criação:</label>
+        <input type="date" id="data" name="data" value="{{ tarefa['data'] }}" required>
+        <br><br>
+        
+    
+        <label>Status:</label><br>
+        <input type="radio" id="pendente" name="status" value="pendente" {% if tarefa['status'] == 'PENDENTE' %}checked{% endif %}>
+        <label for="pendente">Pendente</label><br>
+        <input type="radio" id="em_progresso" name="status" value="em progresso" {% if tarefa['status'] == 'EM PROGRESSO' %}checked{% endif %}>
+        <label for="em_progresso">Em Progresso</label><br>
+        <input type="radio" id="concluida" name="status" value="concluída" {% if tarefa['status'] == 'CONCLUÍDA' %}checked{% endif %}>
+        <label for="concluida">Concluída</label><br><br>
+        
+        <button type="submit">Salvar Alterações</button>
+    </form>
+    {% endif %}
+    <br>
+    <a href="/">Criar novas tarefas</a>
+    <br>
+    <a href="/tarefas">Visualizar tarefas</a>
+</div>
+</body>
+</html>

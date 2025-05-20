@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Tarefas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>div {
+        width: 360px;                
+        padding: 24px;               
+        background-color: #ffffff;
+        border: 2px solid #252825;
+        border-radius: 10px;       
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;          
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transform: scale(1.2);       
+    }
+    
+    div input, div textarea {
+        font-size: 1.2em;             
+    }
+    
+    div h1 {
+        font-size: 3em;
+    }
+    </style>
+</head>
+<body>
+    <div>
+    <h1>Criar Tarefa</h1>
+    <form action="/criar_tarefas" method="post">
+        <label for="titulo">Título:</label>
+        <input type="text" name="titulo" required><br><br>
+
+        <label for="desc">Descrição:</label>
+        <textarea type="text" name="desc" required></textarea><br><br>
+
+        
+        <button type="submit">Criar Tarefas</button>
+    </form>
+    <br>
+    <a href="/tarefas">Visualizar Tarefas</a>
+    <br>
+    <a href="atualizar_excluir">Atualizar ou excluir</a>
+    </div>
+</body>
+</html>
